@@ -360,7 +360,7 @@ h1 {
 <script>
 // Adresse de l'application Web Google Apps Script (voir formulaire-google-sheet.gs).
 // Tant qu'elle est vide, le formulaire reste en aperçu et n'enregistre rien.
-const ENDPOINT = "";
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbzIaJ1BwGprnJ3lVNgrAeq5-d0HAPEvN-CnWas7Km3vS9UB1xpE71Da-FYuqRY4U3_tkw/exec";
 const MAX_PEOPLE = 50;
 const QUESTIONS = 5, RECAP = 5, DONE = 6;
 
@@ -579,7 +579,7 @@ async function send() {
     if (ENDPOINT) {
       // Google Apps Script ne renvoie pas d'en-têtes CORS : la réponse reste opaque,
       // seule une panne réseau est détectable ici.
-      await fetch(ENDPOINT, { method: "POST", mode: "no-cors", body: new URLSearchParams(answers()) });
+      await fetch(ENDPOINT, { method: "POST", mode: "no-cors", body: new URLSearchParams({ ...answers(), formulaire: "degustation" }) });
       $("doneText").textContent = "Votre place est réservée. Rendez-vous vendredi 13 novembre dès 19 h, au 40 rue de Bras à Caen.";
     } else {
       $("doneTitle").textContent = "Aperçu terminé";
